@@ -1,0 +1,149 @@
+  <nav class="navbar navbar-default navbar-static-top" style="background-color:#093052;   border: none;">
+    <div class="container-fluid">
+     <div  class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+          <center>
+            <img src="/serengetalk.png" style="width: 30%; height: 10%; margin: 1%;">
+          </center>
+          </div>
+         <div class="col-md-2"><p style="color:white; margin-top: 8%;">유저의 학교,이름 넣을 곳</p></div> 
+         <div class="col-md-1"><p style="margin-top: 20%;"><a href="/users/sign_out" data-method="delete" style="color:white">로그아웃</a></p></div>
+         <%# 용철님. 유저학교, 이름을 위 col-md-2에 적혀지게 해주세요. %>
+         <%# 용철님. 맨처음 메인페이지가 로그인 페이지이게 할 거에요. 즉 로그인 안하면 못들어가게. 따라서 여기엔 로그아웃 기능으로 넣어줘요. %>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<div class = "talk">
+
+    <div class="chatting">
+        <div class="col-md-5 a">
+            <div class = "wrapper">
+                   <div class = "section">
+                           <center>
+                           <form action="/ohoh/output" method="POST">
+                           <textarea class = "textarea1" rows="2" cols="50" name="content"></textarea><br>
+                           <input class = "button1" type="submit" value="Oh"><br><br>
+                           </form>
+                           <% @dahyes.each do |p| %>
+                               <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
+                           <% end %>
+                           </center>
+                   </div>
+           </div>
+        </div>
+        
+        <div class="col-md-2 timer">
+          <h5><center>http://flipclockjs.com/</center></h5>
+          <%# 용철님. 여기꺼 따와주세요. 잠와서 이제 더 뭐 못하겠음 8ㅅ8 %>
+        </div>
+        
+        <div class="col-md-5 b">
+            <div class = "wrapper">
+                   <div class = "section">
+                           <center>
+                           <form action="/ohoh/output" method="POST">
+                           <textarea class = "textarea2" rows="2" cols="50" name="content"></textarea><br>
+                           <input class = "button2" type="submit" value="Ah"><br><br>
+                           </form> 
+                           <% @dahyes.each do |p| %>
+                               <%=render partial: "chat", locals: {post: p, type: "chat2"}%>
+                           <% end %>
+                           </center>
+                   </div>
+           </div>
+        </div>
+    </div>
+</div>
+<%# 용철님. '나중에 올린 글이 맨 위에 오는', '실시간으로, 새로고침 안해도 최대 400명 동시 사용 가능한 채팅'으로 만들어주세요.%>
+<%# 용철님. 참가자 각각의 학교와 이름이 자신이 적은 채팅내용 아래에 적히도록 해주세요. %> 
+<%# 용철님. 민경님이 말한 '글 쓰는 창은 고정이고 글만 스크롤이 내려가는' 카톡 채팅 형식으로 바꿔주실 수 있나요? %>
+<%# 전 개인적으로 저 채팅형식도 별로 상관없을듯. 헌데 카톡형식이 참가자가 보기 편할 거 같단 생각 드시면 바꿔줘요. %>
+
+<style>
+
+body{
+    background-color: #093052;
+}
+
+li {
+    list-style-type: none;
+}
+
+.timer{
+  color:white;  
+}
+
+.section {
+    margin-top:30px;
+    background-color: #093052;
+    border-radius: 5px;
+    background-image: url(image/icon-info.png);
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+}
+
+.textarea1{
+    padding:20px;
+    border-radius: 20px 20px 20px 0px;
+}
+
+.textarea2{
+    background-color: orange;
+    padding:20px;
+    border-radius: 20px 0px 20px 20px;
+}
+
+
+.button1{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  width: 60px;
+  height: 40px;
+  background-color: white;
+  color: orange;
+  font-size: 20px;
+  border-radius: 13px;
+  transition: .5s ease;
+}
+
+.button2{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  width: 60px;
+  height: 40px;
+  background-color: orange;
+  color: white;
+  font-size: 20px;
+  border-radius: 13px;
+  transition: .5s ease;
+}
+
+.chat1{
+  font-size: 15px;
+  width: 70%;
+  color: white;
+  background-color: orange;
+  padding:10px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px 10px 10px 0px;
+}
+
+.chat2{
+  font-size: 15px;
+  width: 70%;
+  color: orange;
+  background-color: white;
+  padding:10px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px 0px 10px 10px;
+}
+
+</style>

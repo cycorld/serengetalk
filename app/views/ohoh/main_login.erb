@@ -1,0 +1,81 @@
+<%# app/views/devise/sessions/new.html.erb 파일로 옮겨주세요~ %>
+<h3 style="color:#f7941e;"><center>SERENGETALK에 오신 여러분 환영합니다.</center></h3>
+<h1 style="color:#f7941e;"><center>자 그럼 이제 만나러 가봅시다.</center></h1>
+
+<div class = "login-description">
+  <h5 style="color: white;"><center>* 클래스 라이언 아이디와 비밀번호로 로그인하세요 * </center></h5>
+</div>
+
+<%# <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%# <div class="field form_margin">
+    <%# <%= f.label :email %> </br>
+    <%# <%= f.email_field :email, autofocus: true %>
+  <%# </div>
+
+  <%# <div class="field form_margin">
+    <%# <%= f.label :password %> </br>
+    <%# <%= f.password_field :password, autocomplete: "off" %>
+  <%# </div>
+
+  <%# <% if devise_mapping.rememberable? -%>
+    <%# <div class="field form_margin">
+      <%# <%= f.check_box :remember_me %>
+      <%# <%= f.label :remember_me %>
+    <%# </div>
+  <%# <% end %>
+
+  <%# <div class="actions form_margin2">
+    <%# <%= f.submit "Log in" %>
+  <%# </div>
+<%# <% end %>
+
+<%# 용철님. 로그인 기능 오류 안나게 해주세요. %> 
+
+<style>
+body{
+  background-color:#093052; 
+}
+
+.form_margin {
+  margin-top: 10%;
+}
+
+
+.form_margin2 input {
+  margin-top: 50%;
+  margin-bottom: 10%;
+  border: none;
+  width: 100%;
+  height: 30%;
+  background-color: orange;
+  color: white;
+  font-size: 18%;
+  border-radius: 10%;
+  transition: .5s ease;
+}
+
+
+.form_margin2 input, .form_margin2 input:active {
+  transition: .5s ease;
+}
+
+.signup_div {
+  position:absolute;
+  left:50%;
+  margin-left:-200pt;
+  text-align: center;
+  width: 400pt;
+  height: 400pt;
+  display: inline-block;
+  margin-top: 150pt;
+  border-radius: 16pt;
+}
+  
+.login-description{
+  margin-top: 80px;
+  font-size :13px;
+  color:#093052;
+  font-weight: bold;
+}
+
+</style>
