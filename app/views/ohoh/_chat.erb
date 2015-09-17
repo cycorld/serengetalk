@@ -1,3 +1,4 @@
 <div class = "<%=type%>">
-    <%= post.dahye_content %>
+    <p><%= post.content %></p>
+    <p>[<%=current_user.univ%>]<%=current_user.name%>, <%=post.created_at%></p>
 </div>

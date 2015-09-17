@@ -1,13 +1,13 @@
 <script>
     $(function() {
         $('#left_chat_submit').on('click', function() {
-           $.post('/ohoh/send_msg', {content: $('#left_chat_text').val()})
+           $.post('/ohoh/send_msg', {content: $('#left_chat_text').val(), type: "chat1"})
             .done(function(data){
                 $("#left_chat_list").prepend(data);
             });
         });
         $('#right_chat_submit').on('click', function() {
-           $.post('/ohoh/send_msg', {content: $('#right_chat_text').val()})
+           $.post('/ohoh/send_msg', {content: $('#right_chat_text').val(), type: "chat2"})
             .done(function(data){
                 $("#right_chat_list").prepend(data);
             });
@@ -24,7 +24,7 @@
         <img src="/serengetalk.png" style="width: 30%; height: 10%; margin: 1%;">
       </center>
       </div>
-     <div class="col-md-2"><p style="color:white; margin-top: 8%;">유저의 학교,이름 넣을 곳</p></div> 
+     <div class="col-md-2"><p style="color:white; margin-top: 8%;">[<%=current_user.univ%>] <%=current_user.name%></p></div> 
      <div class="col-md-1"><p style="margin-top: 20%;"><a href="/users/sign_out" data-method="delete" style="color:white">로그아웃</a></p></div>
      <%# 용철님. 유저학교, 이름을 위 col-md-2에 적혀지게 해주세요. %>
      <%# 용철님. 맨처음 메인페이지가 로그인 페이지이게 할 거에요. 즉 로그인 안하면 못들어가게. 따라서 여기엔 로그아웃 기능으로 넣어줘요. %>
@@ -45,7 +45,7 @@
                            <textarea id="left_chat_text" class = "textarea1" rows="2" cols="50" name="content"></textarea><br>
                            <input id="left_chat_submit" class="button1" type="submit" value="Oh"><br><br>
                            <div id="left_chat_list">
-                           <% @dahyes.each do |p| %>
+                           <% @chat1.each do |p| %>
                              <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
                            <% end %>            
                            </div>
@@ -62,7 +62,7 @@
                            <textarea id="right_chat_text" class = "textarea2" rows="2" cols="50" name="content"></textarea><br>
                            <input id="right_chat_submit" class="button2" type="submit" value="Ah"><br><br>
                            <div id="right_chat_list">
-                           <% @dahyes.each do |p| %>
+                           <% @chat2.each do |p| %>
                              <%=render partial: "chat", locals: {post: p, type: "chat2"}%>
                            <% end %>            
                            </div>

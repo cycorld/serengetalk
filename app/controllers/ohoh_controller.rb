@@ -2,21 +2,18 @@ class OhohController < ApplicationController
     before_action :authenticate_user!
 
     def main_serengetalk
-        @dahyes = Hehe.all.reverse        
+        @chat1 = Hehe.where(chat_type: "chat1").reverse
+        @chat2 = Hehe.where(chat_type: "chat2").reverse
     end
     
     def send_msg
-        dahye = Hehe.new
-        dahye.dahye_content = params[:content]
-        dahye.save
-        @msg = dahye
+        @msg = Hehe.new
+        @msg.chat_type = params[:type]
+        @msg.user_id = current_user.id
+        @msg.name = current_user.name
+        @msg.univ = current_user.univ
+        @msg.content = params[:content]
+        @msg.save
         render layout: false
-    end
-    
-    def output
-        dahye = Hehe.new
-        dahye.dahye_content = params[:content]
-        dahye.save
-        redirect_to '/ohoh/main_serengetalk'
     end
 end
