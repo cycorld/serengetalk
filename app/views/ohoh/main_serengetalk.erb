@@ -1,57 +1,71 @@
-  <nav class="navbar navbar-default navbar-static-top" style="background-color:#093052;   border: none;">
-    <div class="container-fluid">
-     <div  class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
-          <center>
-            <img src="/serengetalk.png" style="width: 30%; height: 10%; margin: 1%;">
-          </center>
-          </div>
-         <div class="col-md-2"><p style="color:white; margin-top: 8%;">유저의 학교,이름 넣을 곳</p></div> 
-         <div class="col-md-1"><p style="margin-top: 20%;"><a href="/users/sign_out" data-method="delete" style="color:white">로그아웃</a></p></div>
-         <%# 용철님. 유저학교, 이름을 위 col-md-2에 적혀지게 해주세요. %>
-         <%# 용철님. 맨처음 메인페이지가 로그인 페이지이게 할 거에요. 즉 로그인 안하면 못들어가게. 따라서 여기엔 로그아웃 기능으로 넣어줘요. %>
-        </div>
+<script>
+    $(function() {
+        $('#left_chat_submit').on('click', function() {
+           $.post('/ohoh/send_msg', {content: $('#left_chat_text').val()})
+            .done(function(data){
+                $("#left_chat_list").prepend(data);
+            });
+        });
+        $('#right_chat_submit').on('click', function() {
+           $.post('/ohoh/send_msg', {content: $('#right_chat_text').val()})
+            .done(function(data){
+                $("#right_chat_list").prepend(data);
+            });
+        });
+    });
+</script>
+<nav class="navbar navbar-default navbar-static-top" style="background-color:#093052;   border: none;">
+<div class="container-fluid">
+ <div  class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+      <center>
+        <img src="/serengetalk.png" style="width: 30%; height: 10%; margin: 1%;">
+      </center>
       </div>
+     <div class="col-md-2"><p style="color:white; margin-top: 8%;">유저의 학교,이름 넣을 곳</p></div> 
+     <div class="col-md-1"><p style="margin-top: 20%;"><a href="/users/sign_out" data-method="delete" style="color:white">로그아웃</a></p></div>
+     <%# 용철님. 유저학교, 이름을 위 col-md-2에 적혀지게 해주세요. %>
+     <%# 용철님. 맨처음 메인페이지가 로그인 페이지이게 할 거에요. 즉 로그인 안하면 못들어가게. 따라서 여기엔 로그아웃 기능으로 넣어줘요. %>
     </div>
-  </nav>
+  </div>
+</div>
+</nav>
 
 <div class = "talk">
-
+    <div class="col-md-12 timer">
+        <div class="countdown"></div>
+    </div>
     <div class="chatting">
-        <div class="col-md-5 a">
+        <div class="col-md-6 a">
             <div class = "wrapper">
                    <div class = "section">
                            <center>
-                           <form action="/ohoh/output" method="POST">
-                           <textarea class = "textarea1" rows="2" cols="50" name="content"></textarea><br>
-                           <input class = "button1" type="submit" value="Oh"><br><br>
-                           </form>
+                           <textarea id="left_chat_text" class = "textarea1" rows="2" cols="50" name="content"></textarea><br>
+                           <input id="left_chat_submit" class="button1" type="submit" value="Oh"><br><br>
+                           <div id="left_chat_list">
                            <% @dahyes.each do |p| %>
-                               <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
-                           <% end %>
+                             <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
+                           <% end %>            
+                           </div>
+
                            </center>
                    </div>
            </div>
         </div>
         
-        <div class="col-md-2 timer">
-          <h5><center>http://flipclockjs.com/</center></h5>
-          <%# 용철님. 여기꺼 따와주세요. 잠와서 이제 더 뭐 못하겠음 8ㅅ8 %>
-        </div>
-        
-        <div class="col-md-5 b">
+        <div class="col-md-6 b">
             <div class = "wrapper">
                    <div class = "section">
                            <center>
-                           <form action="/ohoh/output" method="POST">
-                           <textarea class = "textarea2" rows="2" cols="50" name="content"></textarea><br>
-                           <input class = "button2" type="submit" value="Ah"><br><br>
-                           </form> 
+                           <textarea id="right_chat_text" class = "textarea2" rows="2" cols="50" name="content"></textarea><br>
+                           <input id="right_chat_submit" class="button2" type="submit" value="Ah"><br><br>
+                           <div id="right_chat_list">
                            <% @dahyes.each do |p| %>
-                               <%=render partial: "chat", locals: {post: p, type: "chat2"}%>
-                           <% end %>
+                             <%=render partial: "chat", locals: {post: p, type: "chat2"}%>
+                           <% end %>            
+                           </div>
                            </center>
                    </div>
            </div>
@@ -146,4 +160,15 @@ li {
   border-radius: 10px 0px 10px 10px;
 }
 
+.countdown {
+    width: 460px;
+    height: 116px;
+    margin: 0 auto;
+}
+
 </style>
+<script>
+var clock = $('.countdown').FlipClock({
+    // ... your options here
+});
+</script>

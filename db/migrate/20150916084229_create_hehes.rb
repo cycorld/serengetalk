@@ -1,7 +1,7 @@
 class CreateHehes < ActiveRecord::Migration
   def change
     create_table :hehes do |t|
-      t.boolean :is_left
+      t.string  :type
       t.integer :user_id
       t.string  :name
       t.string  :univ
