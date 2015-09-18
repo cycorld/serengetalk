@@ -6,3 +6,92 @@ body{
    background-color: #093052;
    font-family: 'Nanum Gothic', sans-serif;
 }
+li {
+  list-style-type: none;
+}
+
+.section {
+  margin-top: 10px;
+}
+
+.textarea1{
+  padding:20px;
+  border-radius: 20px 20px 20px 0px;
+}
+
+.textarea2{
+  background-color: orange;
+  padding:20px;
+  border-radius: 20px 0px 20px 20px;
+}
+
+.button1{
+  border: none;
+  width: 60px;
+  height: 30px;
+  background-color: white;
+  color: orange;
+  font-size: 15px;
+  border-radius: 13px;
+  transition: .5s ease;
+}
+
+.button2{
+  border: none;
+  width: 60px;
+  height: 30px;
+  background-color: orange;
+  color: white;
+  font-size: 15px;
+  border-radius: 13px;
+  transition: .5s ease;
+}
+
+.chat{
+  font-size: 10px;
+}
+
+.chat1{
+  display: block;
+  font-size: 20px;
+  width: 80%;
+  color: white;
+  background-color: orange;
+  margin:10px auto;
+  padding:10px;
+  border: none;
+  border-radius: 20px 20px 20px 0px;
+}
+
+.chat2{
+  display: block;
+  font-size: 20px;
+  width: 80%;
+  color: orange;
+  background-color: white;
+  margin:10px auto;
+  padding:10px;
+  border: none;
+  border-radius: 20px 0px 20px 20px;
+}
+
+.countdown {
+  width: 460px;
+  height: 116px;
+  margin: 0 auto;
+}
+::-webkit-scrollbar {
+    height: 12px;
+    width: 6px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #393812;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}

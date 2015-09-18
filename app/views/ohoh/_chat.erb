@@ -1,4 +1,4 @@
-<div class = "<%=type%>">
-    <p><%= post.content %></p>
-    <p>[<%=current_user.univ%>]<%=current_user.name%>, <%=post.created_at%></p>
+<div class="<%=type%>">
+    <%= render_markdown(post.content.sub('<script>', '<스크립트>').sub('</script>','</스크립트>')).html_safe %>
+    <p style="font-size: 0.5em"><%=current_user.name%>(<%=current_user.univ%>) - <%=post.created_at.localtime.strftime("%Y %B %e %I:%M:%S %p")%></p>
 </div>

@@ -5,6 +5,8 @@ gem 'faye-rails'
 gem 'faye-redis'
 gem 'mysql2'
 gem 'devise'
+gem 'redcarpet'
+gem 'coderay'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record

@@ -1,174 +1,90 @@
 <script>
-    $(function() {
-        $('#left_chat_submit').on('click', function() {
-           $.post('/ohoh/send_msg', {content: $('#left_chat_text').val(), type: "chat1"})
-        });
-        $('#right_chat_submit').on('click', function() {
-           $.post('/ohoh/send_msg', {content: $('#right_chat_text').val(), type: "chat2"})
-        });
+$(function() {
+    $('#left_chat_submit').on('click', function() {
+      $.post('/ohoh/send_msg', {content: $('#left_chat_text').val(), type: "chat1"})
+      });
+    $('#right_chat_submit').on('click', function() {
+      $.post('/ohoh/send_msg', {content: $('#right_chat_text').val(), type: "chat2"})
+      });
     });
 </script>
-<nav class="navbar navbar-default navbar-static-top" style="background-color:#093052;   border: none;">
-<div class="container-fluid">
- <div  class="collapse navbar-collapse" id="navbarCollapse">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-      <center>
-        <img src="/serengetalk.png" style="width: 30%; height: 10%; margin: 1%;">
-      </center>
+<div id="all" style="height: 100vh; overflow: hidden">
+<nav class="navbar navbar-default navbar-static-top" style="background-color:#093052; border: none; height: 10vh; overflow: hidden">
+  <div class="container-fluid">
+    <div  class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="nav navbar-nav navbar-left" style="margin-right: 50px">
+            <li><a href="#" onclick="mode_change();"><span id="mode_icon" style="color: white" class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a></li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <img src="/serengetalk.png" style="display: block; width: 300px; margin: 0 auto; text-align: center;">
+        </div>
+        <div class="col-md-3">
+          <ul class="nav navbar-nav navbar-right" style="margin-right: 50px">
+            <li><a href="#" style="color:white">[<%=current_user.univ%>] <%=current_user.name%></a></li>
+            <li><a href="/users/sign_out" data-method="delete" style="color:white">로그아웃</a></li>
+          </ul>
+        </div>
       </div>
-     <div class="col-md-2"><p style="color:white; margin-top: 8%;">[<%=current_user.univ%>] <%=current_user.name%></p></div> 
-     <div class="col-md-1"><p style="margin-top: 20%;"><a href="/users/sign_out" data-method="delete" style="color:white">로그아웃</a></p></div>
-     <%# 용철님. 유저학교, 이름을 위 col-md-2에 적혀지게 해주세요. %>
-     <%# 용철님. 맨처음 메인페이지가 로그인 페이지이게 할 거에요. 즉 로그인 안하면 못들어가게. 따라서 여기엔 로그아웃 기능으로 넣어줘요. %>
+    </div>
+  </div>
+</nav>
+
+<div class = "talk" style="height: 90vh">
+  <div class="col-md-12 timer" style="height: 10vh">
+    <div class="countdown" style="zoom: 0.7"></div>
+  </div>
+  <!--
+  <center><h5 style="color:white;">SerengeTALK은 생각없고 싶은 분, 할 거 없는 분들이 쓸데없는 얘기를 하고 싶을 때 사용할 곳입니다.</h5></center>
+  <center><h5 style="color:white;">참고로 위 숫자가 00:00:00이 되는 순간 멋쟁이 사자처럼 3기 공식활동은 끝납니다. 하하하 모두 안녕</h5></center>
+  -->
+<style>
+.flip-clock-label {
+  display: none;
+}
+textarea {
+  display: block;
+  margin: 0 auto;
+}
+input {
+  display: block;
+  margin: 0 auto;
+}
+</style>
+  <div class="chatting" style="height: 80vh">
+    <div class="col-sm-6 a">
+      <div class = "wrapper">
+        <div class = "section">
+          <textarea id="left_chat_text" class="textarea1" rows="1" cols="50" name="content" placeholder="Chat"></textarea><br>
+          <input id="left_chat_submit" class="button1" type="submit" value="잘가"><br>
+          <div id="left_chat_list" style="height: 50vh; overflow: auto">
+            <% @chat1.each do |p| %>
+              <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 b">
+      <div class = "wrapper">
+        <div class = "section">
+          <textarea id="right_chat_text" class = "textarea2" rows="1" cols="50" name="content" placeholder="QnA"></textarea><br>
+          <input id="right_chat_submit" class="button2" type="submit" value="빠잉"><br>
+          <div id="right_chat_list" style="height: 50vh; overflow: auto">
+            <% @chat2.each do |p| %>
+              <%=render partial: "chat" ,locals: {post: p, type: "chat2"}%>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</nav>
-
-<div class = "talk">
-    <div class="col-md-12 timer">
-        <div class="countdown"></div>
-    </div>
-    <%# 얘 크기 줄일수 없을까여8ㅅ8  %>
-    <center><h5 style="color:white;">SerengeTALK은 생각없고 싶은 분, 할 거 없는 분들이 쓸데없는 얘기를 하고 싶을 때 사용할 곳입니다.</h5><center>
-    <center><h5 style="color:white;">참고로 위 숫자가 00:00:00이 되는 순간 멋쟁이 사자처럼 3기 공식활동은 끝납니다. 하하하 모두 안녕</h5><center>
-    <div class="chatting">
-        <div class="col-sm-6 a">
-            <div class = "wrapper">
-                   <div class = "section">
-                           <center>
-                           <textarea id="left_chat_text" class = "textarea1" rows="1" cols="50" name="content"></textarea><br>
-                           <input id="left_chat_submit" class="button1" type="submit" value="잘가"><br><br>
-                           <div id="left_chat_list">
-                           <% @chat1.each do |p| %>
-                             <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
-                           <% end %>            
-                           </div>
-
-                           </center>
-                   </div>
-           </div>
-        </div>
-        
-        <div class="col-sm-6 b">
-            <div class = "wrapper">
-                   <div class = "section">
-                           <center>
-                           <textarea id="right_chat_text" class = "textarea2" rows="1" cols="50" name="content"></textarea><br>
-                           <input id="right_chat_submit" class="button2" type="submit" value="빠잉"><br><br>
-                           <div id="right_chat_list">
-                           <% @chat2.each do |p| %>
-                             <%=render partial: "chat" ,locals: {post: p, type: "chat2"}%>
-                           <% end %>            
-                           </div>
-                           </center>
-                   </div>
-           </div>
-        </div>
-    </div>
 </div>
 <audio src="https://github.com/wilson428/metronome/blob/master/tick.wav?raw=true" id="tick"></audio>
-<%# 용철님. '나중에 올린 글이 맨 위에 오는', '실시간으로, 새로고침 안해도 최대 400명 동시 사용 가능한 채팅'으로 만들어주세요.%>
-<%# 용철님. 참가자 각각의 학교와 이름이 자신이 적은 채팅내용 아래에 적히도록 해주세요. %> 
-<%# 용철님. 민경님이 말한 '글 쓰는 창은 고정이고 글만 스크롤이 내려가는' 카톡 채팅 형식으로 바꿔주실 수 있나요? %>
-<%# 전 개인적으로 저 채팅형식도 별로 상관없을듯. 헌데 카톡형식이 참가자가 보기 편할 거 같단 생각 드시면 바꿔줘요. %>
-
-<style>
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-
-
-body{
-    background-color: #093052;
-    font-family: 'Nanum Gothic', sans-serif;
-}
-
-li {
-    list-style-type: none;
-}
-
-.section {
-    margin-top:30px;
-    background-color: #093052;
-    border-radius: 5px;
-    background-image: url(image/icon-info.png);
-    background-repeat: no-repeat;
-    background-position: right 20px center;
-}
-
-.textarea1{
-    padding:20px;
-    border-radius: 20px 20px 20px 0px;
-}
-
-.textarea2{
-    background-color: orange;
-    padding:20px;
-    border-radius: 20px 0px 20px 20px;
-}
-
-
-.button1{
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: none;
-  width: 60px;
-  height: 40px;
-  background-color: white;
-  color: orange;
-  font-size: 15px;
-  border-radius: 13px;
-  transition: .5s ease;
-}
-
-
-.button2{
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: none;
-  width: 60px;
-  height: 40px;
-  background-color: orange;
-  color: white;
-  font-size: 15px;
-  border-radius: 13px;
-  transition: .5s ease;
-}
-
-.chat{
-  font-size: 10px;   
-}
-
-.chat1{
-  font-size: 20px;
-  width: 60%;
-  color: white;
-  background-color: orange;
-  margin:10px;
-  padding:10px;
-  border: none;
-  border-radius: 20px 20px 20px 0px;
-}
-
-.chat2{
-  font-size: 20px;
-  width: 60%;
-  color: orange;
-  background-color: white;
-  margin:10px;
-  padding:10px;
-  border: none;
-  border-radius: 20px 0px 20px 20px;
-}
-
-.countdown {
-  width: 460px;
-  height: 116px;
-  margin: 0 auto;
-}
-
-</style>
 
 <script>
 var on_sound = false;
@@ -178,13 +94,13 @@ var goal = new Date("09/20/2015 05:00:00");
 var now = new Date();
 var rest = (goal - now) / 1000;
 var clock = $('.countdown').FlipClock(rest, {
-  countdown: true,
-  callbacks: {
-  interval: function() {
-        if (on_sound == true)
-          document.getElementById("tick").play();
-    }
-  }
+countdown: true,
+callbacks: {
+interval: function() {
+if (on_sound == true)
+document.getElementById("tick").play();
+}
+}
 })
 var is_active = true;
 var isOldTitle = true;
@@ -192,33 +108,57 @@ var oldTitle = "SerengeTalk";
 var newTitle = "SerengeTalk";
 var interval = null;
 function changeTitle() {
-    document.title = isOldTitle ? oldTitle : newTitle;
-    isOldTitle = !isOldTitle;
+  document.title = isOldTitle ? oldTitle : newTitle;
+  isOldTitle = !isOldTitle;
 }
 
 $(window).focus(function () {
     is_active = true;
     clearInterval(interval);
     $("title").text(oldTitle);
-});
+    });
 $(window).blur(function() {
-  is_active = false;
+    is_active = false;
+    });
+$("#left_chat_list").blur(function() {
+  $(this).css("background-color", "red");
+  alert("blur");
+});
+$("#left_chat_list").focus(function() {
+  $(this).css("background-color", "blue");
+  alert("focus");
 });
 $(document).ready(function() {
-  var client = new Faye.Client('/faye');
-  client.subscribe('/news', function(data) {
+    var client = new Faye.Client('/faye');
+    client.subscribe('/news', function(data) {
       $.get("/ohoh/post?id="+data.id, function(result, status) {
         if(data.chat_type == "chat1") {
-          $("#left_chat_list").prepend(result);
+        $("#left_chat_list").prepend(result);
         } else if(data.chat_type == "chat2") {
-          $("#right_chat_list").prepend(result);
+        $("#right_chat_list").prepend(result);
         }
         if(is_active == false) {
-          newTitle = data.content;
-          clearInterval(interval);
-          interval = setInterval(changeTitle, 500);
+        newTitle = data.content;
+        clearInterval(interval);
+        interval = setInterval(changeTitle, 500);
         }
+        });
       });
-  });
-});
+    });
+var is_one_mode = true;
+function mode_change() {
+  if(is_one_mode){
+    $("#all").css("height", "100%").css("overflow", "auto");
+    $("#left_chat_list").css("height", "100%").css("overflow", "auto");
+    $("#right_chat_list").css("height", "100%").css("overflow", "auto");
+    $("#mode_icon").attr("class", "glyphicon glyphicon-object-align-top");
+    is_one_mode = false;
+  } else {
+    $("#all").css("height", "100vh").css("overflow", "hidden");
+    $("#left_chat_list").css("height", "50vh").css("overflow", "auto");
+    $("#right_chat_list").css("height", "50vh").css("overflow", "auto");
+    $("#mode_icon").attr("class", "glyphicon glyphicon-th-large");
+    is_one_mode = true;
+  }
+}
 </script>
