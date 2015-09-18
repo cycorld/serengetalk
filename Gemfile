@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'thin'
+gem 'faye-rails'
+gem 'faye-redis'
+gem 'mysql2'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
