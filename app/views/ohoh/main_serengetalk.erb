@@ -2,16 +2,32 @@
 $(function() {
     $('#left_chat_submit').on('click', function() {
       $.post('/ohoh/send_msg', {content: $('#left_chat_text').val(), type: "chat1"})
-      });
+      .done(function(e) {
+        $("#left_chat_text").val("").focus();
+        });
+    });
     $('#right_chat_submit').on('click', function() {
       $.post('/ohoh/send_msg', {content: $('#right_chat_text').val(), type: "chat2"})
+      .done(function(e) {
+        $("#right_chat_text").val("").focus();
+        });
       });
-    });
+    $('#left_chat_text').on('keydown', function(e) {
+      if (e.ctrlKey && e.keyCode == 13) {
+        $('#left_chat_submit').trigger('click');
+      }
+      });
+    $('#right_chat_text').on('keydown', function(e) {
+      if (e.ctrlKey && e.keyCode == 13) {
+        $('#right_chat_submit').trigger('click');
+      }
+      });
+});
 </script>
 <div id="all" style="height: 100vh; overflow: hidden">
 <nav class="navbar navbar-default navbar-static-top" style="background-color:#093052; border: none; height: 10vh; overflow: hidden">
   <div class="container-fluid">
-    <div  class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="row">
         <div class="col-md-3">
           <ul class="nav navbar-nav navbar-left" style="margin-right: 50px">
@@ -57,8 +73,8 @@ input {
     <div class="col-sm-6 a">
       <div class = "wrapper">
         <div class = "section">
-          <textarea id="left_chat_text" class="textarea1" rows="1" cols="50" name="content" placeholder="Chat"></textarea><br>
-          <input id="left_chat_submit" class="button1" type="submit" value="잘가"><br>
+          <textarea id="left_chat_text" class="textarea1" rows="1" cols="50" name="content" placeholder="Ctrl + Enter로 전송"></textarea><br>
+          <input id="left_chat_submit" class="button1" type="submit" value="떠들기"><br>
           <div id="left_chat_list" style="height: 50vh; overflow: auto">
             <% @chat1.each do |p| %>
               <%=render partial: "chat", locals: {post: p, type: "chat1"}%>
@@ -72,7 +88,7 @@ input {
       <div class = "wrapper">
         <div class = "section">
           <textarea id="right_chat_text" class = "textarea2" rows="1" cols="50" name="content" placeholder="QnA"></textarea><br>
-          <input id="right_chat_submit" class="button2" type="submit" value="빠잉"><br>
+          <input id="right_chat_submit" class="button2" type="submit" value="질답하기"><br>
           <div id="right_chat_list" style="height: 50vh; overflow: auto">
             <% @chat2.each do |p| %>
               <%=render partial: "chat" ,locals: {post: p, type: "chat2"}%>

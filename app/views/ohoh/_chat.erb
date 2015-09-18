@@ -1,4 +1,4 @@
-<div class="<%=type%>">
+<div class="<%=type%> <%='my_chat' if current_user.id == post.user_id%>">
     <%= render_markdown(post.content.sub('<script>', '<스크립트>').sub('</script>','</스크립트>')).html_safe %>
-    <p style="font-size: 0.5em"><%=current_user.name%>(<%=current_user.univ%>) - <%=post.created_at.localtime.strftime("%Y %B %e %I:%M:%S %p")%></p>
+    <p style="font-size: 0.5em"><%=current_user.name%>(<%=current_user.univ%>) - <%=post.created_at.localtime.strftime("%Y %B %e %p %I:%M:%S")%></p>
 </div>
