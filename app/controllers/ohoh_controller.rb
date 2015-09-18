@@ -1,15 +1,16 @@
 class OhohController < ApplicationController
     before_action :authenticate_user!
-    
-    def new.html
-        
+
+    def post
+      @msg = Hehe.find(params[:id])
+      render layout: false
     end
 
     def main_serengetalk
         @chat1 = Hehe.where(chat_type: "chat1").reverse
         @chat2 = Hehe.where(chat_type: "chat2").reverse
     end
-    
+
     def send_msg
         @msg = Hehe.new
         @msg.chat_type = params[:type]

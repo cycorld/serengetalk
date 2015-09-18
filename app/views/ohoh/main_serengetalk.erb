@@ -192,4 +192,12 @@ var clock = $('.countdown').FlipClock(rest, {
     }
   }
 });
+$(document).ready(function() {
+  var client = new Faye.Client('/faye');
+  client.subscribe('/news', function(data) {
+      $.get("/ohoh/post?id="+data.id, function(data, status) {
+        $("#left_chat_list").prepend(data);
+      });
+  });
+})
 </script>
