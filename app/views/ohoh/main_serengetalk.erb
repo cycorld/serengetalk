@@ -185,6 +185,24 @@ var clock = $('.countdown').FlipClock(rest, {
           document.getElementById("tick").play();
     }
   }
+})
+var is_active = true;
+var isOldTitle = true;
+var oldTitle = "SerengeTalk";
+var newTitle = "SerengeTalk";
+var interval = null;
+function changeTitle() {
+    document.title = isOldTitle ? oldTitle : newTitle;
+    isOldTitle = !isOldTitle;
+}
+
+$(window).focus(function () {
+    is_active = true;
+    clearInterval(interval);
+    $("title").text(oldTitle);
+});
+$(window).blur(function() {
+  is_active = false;
 });
 $(document).ready(function() {
   var client = new Faye.Client('/faye');
@@ -195,7 +213,12 @@ $(document).ready(function() {
         } else if(data.chat_type == "chat2") {
           $("#right_chat_list").prepend(result);
         }
+        if(is_active == false) {
+          newTitle = data.content;
+          clearInterval(interval);
+          interval = setInterval(changeTitle, 500);
+        }
       });
   });
-})
+});
 </script>
