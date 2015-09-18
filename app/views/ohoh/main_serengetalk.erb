@@ -2,15 +2,9 @@
     $(function() {
         $('#left_chat_submit').on('click', function() {
            $.post('/ohoh/send_msg', {content: $('#left_chat_text').val(), type: "chat1"})
-            .done(function(data){
-                $("#left_chat_list").prepend(data);
-            });
         });
         $('#right_chat_submit').on('click', function() {
            $.post('/ohoh/send_msg', {content: $('#right_chat_text').val(), type: "chat2"})
-            .done(function(data){
-                $("#right_chat_list").prepend(data);
-            });
         });
     });
 </script>
@@ -195,8 +189,12 @@ var clock = $('.countdown').FlipClock(rest, {
 $(document).ready(function() {
   var client = new Faye.Client('/faye');
   client.subscribe('/news', function(data) {
-      $.get("/ohoh/post?id="+data.id, function(data, status) {
-        $("#left_chat_list").prepend(data);
+      $.get("/ohoh/post?id="+data.id, function(result, status) {
+        if(data.chat_type == "chat1") {
+          $("#left_chat_list").prepend(result);
+        } else if(data.chat_type == "chat2") {
+          $("#right_chat_list").prepend(result);
+        }
       });
   });
 })
