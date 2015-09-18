@@ -75,6 +75,7 @@
         </div>
     </div>
 </div>
+<audio src="https://github.com/wilson428/metronome/blob/master/tick.wav?raw=true" id="tick"></audio>
 <%# 용철님. '나중에 올린 글이 맨 위에 오는', '실시간으로, 새로고침 안해도 최대 400명 동시 사용 가능한 채팅'으로 만들어주세요.%>
 <%# 용철님. 참가자 각각의 학교와 이름이 자신이 적은 채팅내용 아래에 적히도록 해주세요. %> 
 <%# 용철님. 민경님이 말한 '글 쓰는 창은 고정이고 글만 스크롤이 내려가는' 카톡 채팅 형식으로 바꿔주실 수 있나요? %>
@@ -176,7 +177,19 @@ li {
 </style>
 
 <script>
-var clock = $('.countdown').FlipClock({
-    // ... your options here
+var on_sound = false;
+///////////////// END TIME /////////////////
+var goal = new Date("09/19/2015 05:00:00");
+////////////////////////////////////////////
+var now = new Date();
+var rest = (goal - now) / 1000;
+var clock = $('.countdown').FlipClock(rest, {
+  countdown: true,
+  callbacks: {
+  interval: function() {
+        if (on_sound == true)
+          document.getElementById("tick").play();
+    }
+  }
 });
 </script>
