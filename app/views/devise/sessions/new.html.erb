@@ -1,26 +1,116 @@
-<h2>Log in</h2>
+<br><br><br><br><br>
+<h3 style="color:#f7941e;"><center>SerengeTHON에 오신 여러분 환영합니다.</center></h3><br><br><br>
 
+<h3 style="color:white;"><center>생산성없는 삽질을 찾아 산기슭을 어슬렁거리는 하이에나를 본 적 있는가.</center></h3>
+<h3 style="color:white;"><center>CSS의 썩은 코드만을 찾아다니는 산기슭의 하이에나.</center></h3>
+<h3 style="color:white;"><center>나는 하이에나가 아니라 멋쟁이 사자이고 싶다.</center></h3>
+<h3 style="color:white;"><center>코딩의 세상에 높이 올라가 걷잡을 수 없이 성장해 IT계의 혁신을 일으키는 그 멋쟁이 사자이고 싶다.</center></h3><br><br><br><br>
+
+<h1 style="color:#f7941e;"><center>자 그럼 그 멋쟁이 사자들의 모임, SerengeTALK을 시작하겠습니다.</center></h1>
+<br><br><br><br>
+
+<div class = "nextbtsize"><a class = "nextbt" href="#start"><center><img src = "/nextbt.png"/></center></a></div>
+
+<div Id = "start" class = "login-description">
+  <h5 style="color: white;"><center>* 클래스 라이언 아이디와 비밀번호로 로그인하세요 * </center></h5><br>
+</div>
+
+<center>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+  <div class="field form_margin">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
-  </div>
+  </div><br>
 
-  <div class="field">
+  <div class="field form_margin">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
+  <div class="actions form_margin2">
     <%= f.submit "Log in" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+  <div class="fin">
+     <%= render "devise/shared/links" %>
+  </div>
+</center>
+
+
+<style>
+
+body{
+  background-color:#093052; 
+}
+
+.nextbtsize{
+  cursor: pointer;
+  -webkit-animation-name: buttonAnimation;
+	-webkit-animation-duration: 2.0s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-delay: 0.2s;
+  margin-bottom: 300px;
+  opacity:.5;
+  transition: .5s ease;
+}
+<%# 이거 깜빡거리게 하는 방법 있는데 아무리 생각해도 생각나지 않네여8ㅅ8 %>
+
+.nextbtsize:hover {
+    opacity:1;
+    transition: .5s ease;
+}
+
+.form_margin {
+  color:  #f7941e;
+  margin-top: 10px;
+  border-radius: 10px 10px 10px 0px;
+}
+
+
+.form_margin2 input {
+  margin: 3%;
+  border: none;
+  width: 80px;
+  height: 30px;
+  background-color: #f7941e;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  transition: .5s ease;
+}
+
+
+.signup_div {
+  position:absolute;
+  left:50%;
+  margin-left:-200pt;
+  text-align: center;
+  width: 400px;
+  height: 400px;
+  display: inline-block;
+  margin-top: 150pt;
+  border-radius: 16pt;
+}
+  
+  
+.login-description{
+  font-size :15px;
+  color:#093052;
+  font-weight: bold;
+}
+
+.fin{
+  margin-bottom: 150px;
+}
+</style>
+
+<script>
+ jQuery(document).ready(function($) {
+
+        $(".nextbt").click(function(event){            
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+        });
+});
+</script>

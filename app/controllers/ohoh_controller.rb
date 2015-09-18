@@ -1,5 +1,9 @@
 class OhohController < ApplicationController
     before_action :authenticate_user!
+    
+    def new.html
+        
+    end
 
     def main_serengetalk
         @chat1 = Hehe.where(chat_type: "chat1").reverse
