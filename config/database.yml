@@ -21,5 +21,11 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  reconnect: false
+  database: serengetalk
+  pool: 5
+  username: serengetalk
+  password: serengetalk1342
+  port: 3306
+  host: localhost
